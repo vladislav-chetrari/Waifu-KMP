@@ -1,0 +1,38 @@
+[versions]
+# common
+kotlin = "2.0.20" # https://kotlinlang.org/docs/releases.html#release-details
+kotlinx = "1.9.0" # https://github.com/Kotlin/kotlinx.coroutines/releases
+ksp = "2.0.20-1.0.25" # https://github.com/google/ksp/releases
+dagger = "2.52" # https://github.com/google/dagger/releases
+anvil = "2.5.0-beta11" # https://github.com/square/anvil/releases
+compose-plugin = "1.6.11"
+timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
+junit = "4.13.2"
+# android
+agp = "8.2.2"
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
+androidx-activityCompose = "1.9.2"
+
+[libraries]
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradle = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+anvil-annotations = { module = "com.squareup.anvil:annotations", version.ref = "anvil" }
+anvil-compiler-api = { module = "com.squareup.anvil:compiler-api", version.ref = "anvil" }
+anvil-compiler-core = { module = "com.squareup.anvil:compiler", version.ref = "anvil" }
+anvil-compiler-utils = { module = "com.squareup.anvil:compiler-utils", version.ref = "anvil" }
+anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
