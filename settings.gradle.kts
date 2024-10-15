@@ -1,7 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -20,4 +19,5 @@ dependencyResolutionManagement {
 rootProject.name = "Waifu"
 include(
     ":composeApp",
+    ":core",
 )
