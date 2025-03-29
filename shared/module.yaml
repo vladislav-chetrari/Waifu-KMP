@@ -1,0 +1,22 @@
+product:
+  type: lib
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64, iosX64]
+
+settings:
+  compose:
+    enabled: true
+  kotlin:
+    serialization: enabled
+
+dependencies:
+  - $compose.foundation
+  - $compose.material3
+  - $libs.coil.compose
+  - $libs.coil.ktor
+  - $libs.kermit
+  - $libs.ktor.core
+  - $libs.ktor.cio
+  - $libs.ktor.logging
+  - $libs.ktor.contentNegotiation
+  - $libs.ktor.serialization.json
+  - $libs.viewmodel

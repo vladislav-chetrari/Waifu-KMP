@@ -1,0 +1,12 @@
+product: android/app
+
+settings:
+  compose: enabled
+  android:
+    namespace: org.vchetrari.waifu
+    minSdk: 28
+
+dependencies:
+  - ../shared
+  - $libs.androidx.appCompat
+  - $libs.androidx.activity.compose
