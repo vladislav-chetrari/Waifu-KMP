@@ -1,0 +1,22 @@
+product:
+  type: lib
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64, iosX64]
+
+settings:
+  compose:
+    enabled: true
+  kotlin:
+    serialization: enabled
+
+dependencies:
+  - $compose.foundation
+  - $compose.material3
+  - co.touchlab:kermit:2.0.4
+  - io.coil-kt.coil3:coil-compose:3.1.0
+  - io.coil-kt.coil3:coil-network-ktor3:3.1.0
+  - io.ktor:ktor-client-core:3.1.1
+  - io.ktor:ktor-client-cio:3.1.1
+  - io.ktor:ktor-client-logging:3.1.1
+  - io.ktor:ktor-client-content-negotiation:3.1.1
+  - io.ktor:ktor-serialization-kotlinx-json:3.1.1
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3

@@ -1,0 +1,11 @@
+product: android/app
+
+settings:
+  compose: enabled
+  android:
+    namespace: org.vchetrari.waifu
+
+dependencies:
+  - ../shared
+  - androidx.appcompat:appcompat:1.6.1
+  - androidx.activity:activity-compose:1.7.2
