@@ -7,15 +7,18 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,10 +42,12 @@ private fun WaifuListByTagScreen(
     onTagClick: (Tag) -> Unit,
 ) {
     var isTagsBottomSheetOpen by remember { mutableStateOf(false) }
+    var tagsButtonWidthPx by remember { mutableIntStateOf(0) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             TagsButton(
+                modifier = Modifier.onSizeChanged { tagsButtonWidthPx = it.width },
                 isActionOpen = !isTagsBottomSheetOpen,
                 onClick = { isTagsBottomSheetOpen = !isTagsBottomSheetOpen },
             )
@@ -69,6 +74,9 @@ private fun WaifuListByTagScreen(
                         .fillMaxWidth()
                         .padding(8.dp),
                     elevation = 4.dp,
+                    contentPadding = PaddingValues(
+                        end = with(LocalDensity.current) { tagsButtonWidthPx.toDp() },
+                    ),
                     filterTags = state.filterTags,
                     onTagClick = onTagClick,
                 )
@@ -99,10 +107,20 @@ private fun WaifuList(
 
 @Composable
 private fun TagsButton(
+    modifier: Modifier = Modifier,
     isActionOpen: Boolean,
     onClick: () -> Unit
 ) {
-    FloatingActionButton(onClick = onClick) {
+    FloatingActionButton(
+        modifier = modifier,
+        elevation = FloatingActionButtonDefaults.elevation(
+            defaultElevation = if (isActionOpen) 4.dp else 0.dp,
+        ),
+        containerColor =
+            if (isActionOpen) MaterialTheme.colorScheme.primaryContainer
+            else MaterialTheme.colorScheme.secondaryContainer,
+        onClick = onClick
+    ) {
         val icon = if (isActionOpen) Icons.Outlined.Menu else Icons.Outlined.Close
         Icon(
             imageVector = icon,
@@ -129,27 +147,48 @@ private fun Waifu(
 private fun FilterTagsCard(
     modifier: Modifier = Modifier,
     elevation: Dp,
+    contentPadding: PaddingValues,
     filterTags: List<WaifuListByTagState.FilterTag>,
     onTagClick: (Tag) -> Unit,
 ) {
     Card(
         modifier = modifier,
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation),
+        colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
     ) {
         FlowRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+                .padding(contentPadding),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
             filterTags.forEach { filterTag ->
+                val borderColor = when {
+                    filterTag.isSelected -> Color.Transparent
+                    filterTag.tag.isNSFW -> MaterialTheme.colorScheme.error
+                    else -> MaterialTheme.colorScheme.secondary
+                }
+
                 FilterChip(
                     selected = filterTag.isSelected,
-                    shape = RoundedCornerShape(8.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-                    label = { BasicText(filterTag.tag.name) },
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.dp, borderColor),
+                    leadingIcon = {
+                        if (filterTag.isSelected) Icon(
+                            modifier = Modifier.size(FilterChipDefaults.IconSize),
+                            imageVector = Icons.Outlined.Done,
+                            contentDescription = null,
+                        )
+                    },
+                    label = { Text(filterTag.tag.name) },
                     onClick = { onTagClick(filterTag.tag) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.secondary,
+                        selectedLeadingIconColor = MaterialTheme.colorScheme.onSecondary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onSecondary
+                    ),
                 )
             }
         }
