@@ -4,8 +4,9 @@ settings:
   compose: enabled
   android:
     namespace: org.vchetrari.waifu
+    minSdk: 28
 
 dependencies:
   - ../shared
-  - androidx.appcompat:appcompat:1.6.1
-  - androidx.activity:activity-compose:1.7.2
+  - $libs.androidx.appCompat
+  - $libs.androidx.activity.compose
