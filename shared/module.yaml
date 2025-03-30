@@ -5,17 +5,8 @@ product:
 settings:
   compose:
     enabled: true
-  kotlin:
-    serialization: enabled
 
 dependencies:
   - ../core/design
-  - ../core/network
+  - ../feature/list
   - $compose.foundation
-  - $compose.material3
-  - $libs.coil.compose
-  - $libs.coil.ktor
-  - $libs.kermit
-  - $libs.kodein
-  - $libs.kodein.compose
-  - $libs.viewmodel

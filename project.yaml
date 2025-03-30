@@ -1,7 +1,8 @@
 modules:
   - core/design
   - core/network
+  - feature/list
+  - shared
   - android-app
   - ios-app
   - jvm-app
-  - shared

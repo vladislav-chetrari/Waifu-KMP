@@ -10,7 +10,7 @@ import org.vchetrari.waifu.feature.list.data.DefaultWaifuRepository
 import org.vchetrari.waifu.feature.list.data.WaifuRepository
 import org.vchetrari.waifu.feature.list.presentation.WaifuListByTagViewModel
 
-val featureWaifuModule by DI.Module {
+internal val featureWaifuModule by DI.Module {
     import(networkModule)
     bindSingleton<WaifuRepository> { DefaultWaifuRepository(instance<HttpClient>()) }
     bindProvider { WaifuListByTagViewModel(instance<WaifuRepository>()) }
