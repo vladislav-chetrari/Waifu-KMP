@@ -21,14 +21,16 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
+import org.kodein.di.compose.rememberInstance
+import org.kodein.di.compose.withDI
 import org.vchetrari.waifu.feature.list.data.model.domain.Tag
 import org.vchetrari.waifu.feature.list.data.model.domain.Waifu
+import org.vchetrari.waifu.feature.list.featureWaifuModule
 
 @Composable
-fun WaifuListByTagScreen() {
-    val viewModel = viewModel { WaifuListByTagViewModel() }
+fun WaifuListByTagScreen() = withDI(featureWaifuModule) {
+    val viewModel by rememberInstance<WaifuListByTagViewModel>()
     val state by viewModel.stateFlow.collectAsState()
     WaifuListByTagScreen(
         state = state,

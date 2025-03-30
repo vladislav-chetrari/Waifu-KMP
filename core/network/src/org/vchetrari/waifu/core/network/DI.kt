@@ -1,19 +1,21 @@
 package org.vchetrari.waifu.core.network
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.HttpSend
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.plugin
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
+import org.kodein.di.DI
+import org.kodein.di.bindSingleton
 
-object NetworkDI {
-
-    val httpClient by lazy {
+val networkModule by DI.Module {
+    bindSingleton<HttpClient> {
+        //apply multi-binding if needed, for now only internal interceptors are used
+        val interceptors = setOf<RestRequestInterceptor>(
+            AuthRequestInterceptor,
+        )
         val client = HttpClient(CIO) {
             defaultRequest {
                 url("https://api.waifu.im/")
@@ -31,16 +33,10 @@ object NetworkDI {
             }
         }
         client.plugin(HttpSend).intercept { requestBuilder ->
-            val newRequestBuilder = requestInterceptors
+            val newRequestBuilder = interceptors
                 .fold(requestBuilder) { request, interceptor -> interceptor.intercept(request) }
             execute(newRequestBuilder)
         }
         client
-    }
-
-    private val requestInterceptors: Set<KtorRequestInterceptor> by lazy {
-        setOf(
-            AuthRequestInterceptor,
-        )
     }
 }

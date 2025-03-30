@@ -8,6 +8,7 @@ settings:
 
 dependencies:
   - $libs.kermit
+  - $libs.kodein
   - $libs.ktor.core
   - $libs.ktor.cio
   - $libs.ktor.logging
