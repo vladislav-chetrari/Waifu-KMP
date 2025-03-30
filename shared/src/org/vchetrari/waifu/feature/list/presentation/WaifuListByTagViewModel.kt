@@ -8,12 +8,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.vchetrari.waifu.feature.list.data.DataDI
 import org.vchetrari.waifu.feature.list.data.WaifuRepository
 import org.vchetrari.waifu.feature.list.data.model.domain.Tag
 
 class WaifuListByTagViewModel(
-    private val repository: WaifuRepository = DataDI.waifuRepository,
+    private val repository: WaifuRepository,
 ) : ViewModel() {
 
     private val mutableStateFlow = MutableStateFlow(WaifuListByTagState())
