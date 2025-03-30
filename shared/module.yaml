@@ -9,14 +9,11 @@ settings:
     serialization: enabled
 
 dependencies:
+  - ../core/design
+  - ../core/network
   - $compose.foundation
   - $compose.material3
   - $libs.coil.compose
   - $libs.coil.ktor
   - $libs.kermit
-  - $libs.ktor.core
-  - $libs.ktor.cio
-  - $libs.ktor.logging
-  - $libs.ktor.contentNegotiation
-  - $libs.ktor.serialization.json
   - $libs.viewmodel

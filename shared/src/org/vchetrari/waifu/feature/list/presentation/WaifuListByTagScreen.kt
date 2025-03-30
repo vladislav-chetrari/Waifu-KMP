@@ -165,16 +165,17 @@ private fun FilterTagsCard(
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
             filterTags.forEach { filterTag ->
-                val borderColor = when {
-                    filterTag.isSelected -> Color.Transparent
-                    filterTag.tag.isNSFW -> MaterialTheme.colorScheme.error
-                    else -> MaterialTheme.colorScheme.secondary
-                }
-
                 FilterChip(
                     selected = filterTag.isSelected,
                     shape = RoundedCornerShape(12.dp),
-                    border = BorderStroke(1.dp, borderColor),
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = when {
+                            filterTag.isSelected -> Color.Transparent
+                            filterTag.tag.isNSFW -> MaterialTheme.colorScheme.error
+                            else -> MaterialTheme.colorScheme.secondary
+                        }
+                    ),
                     leadingIcon = {
                         if (filterTag.isSelected) Icon(
                             modifier = Modifier.size(FilterChipDefaults.IconSize),

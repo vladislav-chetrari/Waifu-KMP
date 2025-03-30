@@ -6,5 +6,6 @@ object DataDI {
 
     val waifuRepository: WaifuRepository by lazy {
         DefaultWaifuRepository(httpClient = NetworkDI.httpClient)
+//        MockWaifuRepository()
     }
 }

@@ -1,4 +1,6 @@
 modules:
+  - core/design
+  - core/network
   - android-app
   - ios-app
   - jvm-app

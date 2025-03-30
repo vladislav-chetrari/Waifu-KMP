@@ -12,7 +12,7 @@ import org.vchetrari.waifu.feature.list.data.model.response.TagsResponse
 import org.vchetrari.waifu.feature.list.data.model.response.WaifuResponse
 import org.vchetrari.waifu.feature.list.data.model.response.WaifuSearchResponse
 
-class DefaultWaifuRepository(
+ internal class DefaultWaifuRepository(
     private val httpClient: HttpClient,
 ) : WaifuRepository {
 
