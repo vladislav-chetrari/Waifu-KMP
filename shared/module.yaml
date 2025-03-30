@@ -16,6 +16,6 @@ dependencies:
   - $libs.coil.compose
   - $libs.coil.ktor
   - $libs.kermit
-  - $libs.kodein: exported
+  - $libs.kodein
   - $libs.kodein.compose
   - $libs.viewmodel
