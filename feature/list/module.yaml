@@ -2,9 +2,10 @@ product:
   type: lib
   platforms: [ jvm, android, iosArm64, iosSimulatorArm64, iosX64 ]
 
+apply:
+  - ../../template/compose.module-template.yaml
+
 settings:
-  compose:
-    enabled: true
   kotlin:
     serialization: enabled
 

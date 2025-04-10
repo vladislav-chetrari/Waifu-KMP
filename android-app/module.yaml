@@ -1,7 +1,8 @@
 product: android/app
 
+apply:
+  - ../template/compose.module-template.yaml
 settings:
-  compose: enabled
   android:
     namespace: org.vchetrari.waifu
     minSdk: 28
