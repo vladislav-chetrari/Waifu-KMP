@@ -1,7 +1,7 @@
 product: jvm/app
 
-settings:
-  compose: enabled
+apply:
+  - ../template/compose.module-template.yaml
 
 dependencies:
   - ../shared

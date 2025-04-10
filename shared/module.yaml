@@ -2,9 +2,8 @@ product:
   type: lib
   platforms: [ jvm, android, iosArm64, iosSimulatorArm64, iosX64 ]
 
-settings:
-  compose:
-    enabled: true
+apply:
+  - ../template/compose.module-template.yaml
 
 dependencies:
   - ../core/design

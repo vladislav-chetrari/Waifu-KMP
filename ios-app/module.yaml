@@ -2,10 +2,12 @@ product:
   type: ios/app
   platforms: [ iosSimulatorArm64 ]
 
+apply:
+  - ../template/compose.module-template.yaml
+
 dependencies:
   - ../shared
 
 settings:
-  compose: enabled
   ios:
     teamId: <your team ID here> # See https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/
