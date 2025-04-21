@@ -11,8 +11,8 @@ buildkonfig {
     defaultConfigs {
         buildConfigField(
             type = STRING,
-            name = "BEARER_TOKEN",
-            value = gradleLocalProperties(rootDir).getProperty("BEARER_TOKEN").orEmpty()
+            name = "apiKey",
+            value = gradleLocalProperties(rootDir).getProperty("WAIFU_API_KEY").orEmpty()
         )
     }
 }
