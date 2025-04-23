@@ -5,5 +5,6 @@ import org.vchetrari.waifu.App
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
         App()
+        //test master branch protection
     }
 }
