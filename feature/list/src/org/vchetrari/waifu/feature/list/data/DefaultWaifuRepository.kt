@@ -12,7 +12,7 @@ import org.vchetrari.waifu.feature.list.data.model.response.TagsResponse
 import org.vchetrari.waifu.feature.list.data.model.response.WaifuResponse
 import org.vchetrari.waifu.feature.list.data.model.response.WaifuSearchResponse
 
- internal class DefaultWaifuRepository(
+internal class DefaultWaifuRepository(
     private val httpClient: HttpClient,
 ) : WaifuRepository {
 
@@ -43,7 +43,6 @@ import org.vchetrari.waifu.feature.list.data.model.response.WaifuSearchResponse
     }.onFailure { exception ->
         Logger.e(exception) { "Search request failure" }
     }
-
 
     private fun TagResponse.asDomainModel(): Tag = Tag(
         id = id,
