@@ -6,13 +6,9 @@ plugins {
 }
 
 buildkonfig {
-    packageName = "com.vchetrari.core.network"
+    packageName = "com.vchetrari.waifu"
 
     defaultConfigs {
-        buildConfigField(
-            type = STRING,
-            name = "apiKey",
-            value = gradleLocalProperties(rootDir).getProperty("WAIFU_API_KEY").orEmpty()
-        )
+        buildConfigField(STRING, "apiKey", gradleLocalProperties(rootDir).getProperty("WAIFU_API_KEY").orEmpty())
     }
 }
