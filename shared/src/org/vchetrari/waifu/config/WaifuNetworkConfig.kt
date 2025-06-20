@@ -7,5 +7,5 @@ object WaifuNetworkConfig : NetworkConfig {
 
     override val restBaseUrl = "https://api.waifu.im/"
     override val restApiKey: String? = BuildKonfig.apiKey.takeUnless(String::isBlank)
-    override val isLoggingEnabled = true
+    override val isLoggingEnabled = BuildKonfig.isDebug
 }
