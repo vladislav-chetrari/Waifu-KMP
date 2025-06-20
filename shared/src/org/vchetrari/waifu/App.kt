@@ -7,6 +7,6 @@ import org.vchetrari.waifu.feature.list.presentation.WaifuListByTagScreen
 @Composable
 fun App() {
     WaifuTheme {
-        WaifuListByTagScreen()
+        WaifuListByTagScreen(di)
     }
 }

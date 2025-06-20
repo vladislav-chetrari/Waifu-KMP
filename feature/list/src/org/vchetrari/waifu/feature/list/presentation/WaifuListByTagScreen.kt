@@ -2,7 +2,17 @@ package org.vchetrari.waifu.feature.list.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -11,8 +21,25 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.Menu
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,14 +49,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import org.kodein.di.DI
 import org.kodein.di.compose.rememberInstance
 import org.kodein.di.compose.withDI
 import org.vchetrari.waifu.feature.list.data.model.domain.Tag
 import org.vchetrari.waifu.feature.list.data.model.domain.Waifu
-import org.vchetrari.waifu.feature.list.featureWaifuModule
 
 @Composable
-fun WaifuListByTagScreen() = withDI(featureWaifuModule) {
+fun WaifuListByTagScreen(di: DI) = withDI(di) {
     val viewModel by rememberInstance<WaifuListByTagViewModel>()
     val state by viewModel.stateFlow.collectAsState()
     WaifuListByTagScreen(
@@ -111,7 +138,7 @@ private fun WaifuList(
 private fun TagsButton(
     modifier: Modifier = Modifier,
     isActionOpen: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     FloatingActionButton(
         modifier = modifier,
@@ -175,7 +202,7 @@ private fun FilterTagsCard(
                         color = when {
                             filterTag.isSelected -> Color.Transparent
                             filterTag.tag.isNSFW -> MaterialTheme.colorScheme.error
-                            else -> MaterialTheme.colorScheme.secondary
+                            else                 -> MaterialTheme.colorScheme.secondary
                         }
                     ),
                     leadingIcon = {

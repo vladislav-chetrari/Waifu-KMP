@@ -1,13 +1,14 @@
 package org.vchetrari.waifu.core.network
 
-import com.vchetrari.core.network.BuildKonfig
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 
-internal object AuthRequestInterceptor : RestRequestInterceptor {
+internal class AuthRequestInterceptor(
+    private val config: NetworkConfig,
+) : RestRequestInterceptor {
 
     override suspend fun intercept(httpRequestBuilder: HttpRequestBuilder): HttpRequestBuilder {
-        httpRequestBuilder.header("Authorization", "Bearer ${BuildKonfig.apiKey}")
+        config.restApiKey?.let { httpRequestBuilder.header("Authorization", "Bearer $it") }
         return httpRequestBuilder
     }
 }
